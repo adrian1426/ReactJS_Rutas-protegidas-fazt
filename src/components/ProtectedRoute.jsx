@@ -1,15 +1,15 @@
 import React from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { routes } from '../constants/routesConstants';
 
 const ProtectedRoute = (props) => {
-  const { children, user } = props;
+  const { user, chidren } = props;
 
   if (!user) {
     return <Navigate to={`/${routes.landing}`} />;
   }
 
-  return children;
+  return chidren ? chidren : <Outlet />;
 };
 
 export default ProtectedRoute;

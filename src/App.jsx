@@ -37,30 +37,12 @@ function App() {
       <Routes>
         <Route index element={<LandingPage />} />
         <Route path={`/${routes.landing}`} element={<LandingPage />} />
-        <Route
-          path={`/${routes.home}`}
-          element={
-            <ProtectedRoute user={user}>
-              <HomePage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={`/${routes.dashboard}`}
-          element={
-            <ProtectedRoute user={user}>
-              <DashboardPage />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path={`/${routes.analitycs}`}
-          element={<AnalityctsPage />}
-        />
-        <Route
-          path={`/${routes.admin}`}
-          element={<AdminPage />}
-        />
+        <Route element={<ProtectedRoute user={user} />}>
+          <Route path={`/${routes.home}`} element={<HomePage />} />
+          <Route path={`/${routes.dashboard}`} element={<DashboardPage />} />
+        </Route>
+        <Route path={`/${routes.analitycs}`} element={<AnalityctsPage />} />
+        <Route path={`/${routes.admin}`} element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   )
