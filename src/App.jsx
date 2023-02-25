@@ -16,7 +16,8 @@ function App() {
   const handleLogin = () => {
     setUser({
       id: 1,
-      name: 'Adrian'
+      name: 'Adrian',
+      roles: ['analize', 'support']
     });
   };
 
@@ -37,12 +38,37 @@ function App() {
       <Routes>
         <Route index element={<LandingPage />} />
         <Route path={`/${routes.landing}`} element={<LandingPage />} />
-        <Route element={<ProtectedRoute user={user} />}>
+        <Route
+          element={
+            <ProtectedRoute
+              isAllowed={!!user}
+              redirectTo={`/${routes.landing}`}
+            />}
+        >
           <Route path={`/${routes.home}`} element={<HomePage />} />
           <Route path={`/${routes.dashboard}`} element={<DashboardPage />} />
         </Route>
-        <Route path={`/${routes.analitycs}`} element={<AnalityctsPage />} />
-        <Route path={`/${routes.admin}`} element={<AdminPage />} />
+        <Route
+          path={`/${routes.analitycs}`}
+          element={
+            <ProtectedRoute
+              isAllowed={!!user && user.roles.includes('analize')}
+              redirectTo={`/${routes.home}`}
+            >
+              <AnalityctsPage />
+            </ProtectedRoute>
+          } />
+        <Route
+          path={`/${routes.admin}`}
+          element={
+            <ProtectedRoute
+              isAllowed={!!user && user.roles.includes('admin')}
+              redirectTo={`/${routes.home}`}
+            >
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   )

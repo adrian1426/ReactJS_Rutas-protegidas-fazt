@@ -18,7 +18,7 @@ const Navigation = () => {
           <Link to={`/${routes.analitycs}`}>Analitycs</Link>
         </li>
         <li>
-          <Link to={`/${routes.admin}`}>Analitycs</Link>
+          <Link to={`/${routes.admin}`}>Admin</Link>
         </li>
       </ul>
     </nav>
